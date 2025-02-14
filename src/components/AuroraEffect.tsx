@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -116,34 +117,34 @@ const fragmentShader = `
 
   float createBand(vec2 uv, float offset) {
     float band = cnoise(vec3(uv.x * 3.0, uv.y * 2.0 + offset + time * 0.2, time * 0.1));
-    band = smoothstep(0.2, 0.8, band + 0.5); // Create sharper bands
+    band = smoothstep(0.1, 0.9, band + 0.5); // Create even sharper bands
     return band;
   }
 
   void main() {
-    // Create multiple shimmering bands
+    // Create multiple shimmering bands with more intensity
     float band1 = createBand(vUv, 0.0);
     float band2 = createBand(vUv + vec2(0.5, 2.0), 10.0);
     float band3 = createBand(vUv + vec2(-0.3, 1.0), 20.0);
     
-    // Layer the bands with different intensities
-    float finalBand = band1 * 0.5 + band2 * 0.3 + band3 * 0.2;
+    // Layer the bands with higher intensities
+    float finalBand = band1 * 0.7 + band2 * 0.5 + band3 * 0.3;
     
-    // Add vertical falloff for more natural look
-    float verticalFalloff = smoothstep(0.0, 0.5, 1.0 - abs(vUv.y * 2.0 - 1.0));
+    // Add stronger vertical falloff
+    float verticalFalloff = smoothstep(0.0, 0.7, 1.0 - abs(vUv.y * 2.0 - 1.0));
     finalBand *= verticalFalloff;
     
-    // Add time-based shimmer effect
-    float shimmer = sin(time * 2.0 + vUv.x * 10.0) * 0.1 + 0.9;
+    // Enhanced shimmer effect
+    float shimmer = sin(time * 3.0 + vUv.x * 15.0) * 0.15 + 0.85;
     
-    // Create color transitions
+    // Create color transitions with more vivid colors
     vec3 color = mix(color1, color2, finalBand);
-    color = mix(color, color3, band2 * 0.5);
+    color = mix(color, color3, band2 * 0.7);
     
-    // Apply shimmer and brightness variation
-    float brightness = 0.8 + sin(time * 0.5) * 0.2;
+    // Apply enhanced shimmer and brightness variation
+    float brightness = 1.2 + sin(time * 0.5) * 0.3;
     
-    gl_FragColor = vec4(color * brightness * shimmer, finalBand * 0.8);
+    gl_FragColor = vec4(color * brightness * shimmer, finalBand * 0.9);
   }
 `;
 
@@ -168,20 +169,24 @@ const AuroraEffect: React.FC = () => {
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     
-    // Initialize renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    // Initialize renderer with higher alpha
+    const renderer = new THREE.WebGLRenderer({ 
+      antialias: true, 
+      alpha: true,
+      premultipliedAlpha: false
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Create aurora material with enhanced colors
+    // Create aurora material with more intense colors
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color1: { value: new THREE.Color(0x22c55e).multiplyScalar(1.5) }, // Brighter green
-        color2: { value: new THREE.Color(0x8b5cf6).multiplyScalar(1.2) }, // Brighter purple
-        color3: { value: new THREE.Color(0x0ea5e9).multiplyScalar(1.3) }, // Brighter blue
+        color1: { value: new THREE.Color(0x22c55e).multiplyScalar(2.0) }, // Even brighter green
+        color2: { value: new THREE.Color(0x8b5cf6).multiplyScalar(1.8) }, // Even brighter purple
+        color3: { value: new THREE.Color(0x0ea5e9).multiplyScalar(1.9) }, // Even brighter blue
       },
       vertexShader,
       fragmentShader,
@@ -195,11 +200,11 @@ const AuroraEffect: React.FC = () => {
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    // Animation loop
+    // Animation loop with slower movement
     let animationFrameId: number;
     const animate = () => {
       if (materialRef.current) {
-        materialRef.current.uniforms.time.value += 0.005; // Slower animation for more natural movement
+        materialRef.current.uniforms.time.value += 0.003; // Even slower for more natural movement
       }
       renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(animate);
@@ -238,6 +243,7 @@ const AuroraEffect: React.FC = () => {
         height: '100%',
         zIndex: -1,
         pointerEvents: 'none',
+        opacity: 0.8, // Slightly reduce overall opacity to blend better with stars
       }} 
     />
   );
