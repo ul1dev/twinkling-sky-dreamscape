@@ -19,12 +19,24 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Navigate to="/en" replace />} />
           <Route path="/:lang" element={<Layout><Index /></Layout>} />
-          <Route path="/:lang/terms" element={<Layout><div className="text-white">Terms Page</div></Layout>} />
-          <Route path="/:lang/privacy" element={<Layout><div className="text-white">Privacy Page</div></Layout>} />
-          <Route path="/:lang/tours" element={<Layout><div className="text-white">Tours Page</div></Layout>} />
-          <Route path="/:lang/houses" element={<Layout><div className="text-white">Houses Page</div></Layout>} />
-          <Route path="/:lang/about" element={<Layout><div className="text-white">About Page</div></Layout>} />
-          <Route path="/:lang/contact" element={<Layout><div className="text-white">Contact Page</div></Layout>} />
+          <Route path="/:lang/terms" element={<Layout>
+            <div className="text-white">Terms Page</div>
+          </Layout>} />
+          <Route path="/:lang/privacy" element={<Layout>
+            <div className="text-white">Privacy Page</div>
+          </Layout>} />
+          <Route path="/:lang/tours" element={<Layout>
+            <div className="text-white">Tours Page</div>
+          </Layout>} />
+          <Route path="/:lang/houses" element={<Layout>
+            <div className="text-white">Houses Page</div>
+          </Layout>} />
+          <Route path="/:lang/about" element={<Layout>
+            <div className="text-white">About Page</div>
+          </Layout>} />
+          <Route path="/:lang/contact" element={<Layout>
+            <div className="text-white">Contact Page</div>
+          </Layout>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

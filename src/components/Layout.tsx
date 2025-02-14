@@ -4,9 +4,13 @@ import Header from "./Header";
 import Footer from "./Footer";
 import StarryNight from "./StarryNight";
 import AuroraEffect from "./AuroraEffect";
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 
-const Layout = () => {
+interface LayoutProps {
+  children?: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
   const [currentLang, setCurrentLang] = useState("en");
 
   const handleLanguageChange = (lang: string) => {
@@ -19,9 +23,9 @@ const Layout = () => {
       <StarryNight />
       <AuroraEffect />
       <main className="flex-1 container mx-auto px-4 py-24">
-        <Outlet />
+        {children || <Outlet />}
       </main>
-      <Footer />
+      <Footer currentLang={currentLang} />
     </div>
   );
 };
