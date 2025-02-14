@@ -37,33 +37,35 @@ const Index = () => {
   const content = getContent();
 
   return (
-    <main className="relative z-10">
-      <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-4xl mx-auto px-4">
-        <div className="text-white space-y-8">
+    <main className="relative z-10 min-h-screen">
+      <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-4xl mx-auto px-4 py-12">
+        <div className="content-container text-white space-y-8 w-full">
           <div className="flex items-center justify-center mb-8">
-            <Squirrel className="w-16 h-16 text-green-400" />
+            <div className="p-4 rounded-full bg-slate-800/50">
+              <Squirrel className="w-16 h-16 text-slate-300" />
+            </div>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div>
               {content.pitch.split('\n').map((paragraph, index) => (
-                <p key={index} className="text-xl text-gray-300 mb-4">
+                <p key={index} className="text-xl text-slate-300 mb-4 leading-relaxed">
                   {paragraph}
                 </p>
               ))}
             </div>
 
-            <div className="flex items-center justify-center space-x-4">
+            <div className="flex items-center justify-center space-x-6">
               <Button 
                 onClick={() => navigate(`/${currentLang}/tours`)}
-                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2"
+                className="button-rounded bg-slate-700 hover:bg-slate-600 text-white px-8 py-6 text-lg"
               >
                 {content.bookTour}
               </Button>
               <Button 
                 onClick={() => navigate(`/${currentLang}/houses`)}
                 variant="outline"
-                className="border-green-500 text-green-500 hover:bg-green-500/10 px-6 py-2"
+                className="button-rounded border-slate-600 text-slate-300 hover:bg-slate-700/50 px-8 py-6 text-lg"
               >
                 {content.rentHouse}
               </Button>
@@ -71,7 +73,7 @@ const Index = () => {
 
             <div className="mt-16">
               {content.about.split('\n').map((paragraph, index) => (
-                <p key={index} className="text-base text-gray-400 mb-4">
+                <p key={index} className="text-base text-slate-400 mb-6 leading-relaxed">
                   {paragraph}
                 </p>
               ))}
