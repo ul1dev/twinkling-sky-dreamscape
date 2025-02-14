@@ -20,25 +20,25 @@
 
 @keyframes aurora {
   0% {
-    transform: translate(0, 0) scaleX(1);
-    opacity: 0.3;
+    transform: translate(0, 0) scaleX(0.8);
+    opacity: 0.2;
   }
   50% {
-    transform: translate(30px, -10px) scaleX(1.2);
-    opacity: 0.5;
+    transform: translate(15px, -5px) scaleX(1.1);
+    opacity: 0.3;
   }
   100% {
-    transform: translate(0, 0) scaleX(1);
-    opacity: 0.3;
+    transform: translate(0, 0) scaleX(0.8);
+    opacity: 0.2;
   }
 }
 
 .aurora {
   position: absolute;
-  top: 0;
+  top: -20vh;
   left: 0;
   right: 0;
-  height: 50vh;
+  height: 40vh;
   pointer-events: none;
   mix-blend-mode: screen;
 }
@@ -46,30 +46,34 @@
 .aurora__item {
   overflow: hidden;
   position: absolute;
-  width: 200%;
+  width: 60%;
   height: 100%;
   animation: aurora 25s linear infinite;
   background-image: linear-gradient(80deg, 
-    rgba(34, 197, 94, 0.2),
-    rgba(14, 165, 233, 0.2), 
-    rgba(34, 197, 94, 0.2));
-  filter: blur(50px);
+    rgba(34, 197, 94, 0.15),
+    rgba(14, 165, 233, 0.15), 
+    rgba(34, 197, 94, 0.15));
+  filter: blur(30px);
 }
 
 .aurora__item:nth-child(1) {
-  top: -30%;
+  left: 10%;
+  top: -50%;
   animation-delay: 0s;
 }
 
 .aurora__item:nth-child(2) {
-  top: -15%;
+  left: 30%;
+  top: -40%;
+  width: 40%;
   animation-delay: 8s;
   animation-duration: 30s;
 }
 
 .aurora__item:nth-child(3) {
-  top: 0%;
+  left: 20%;
+  top: -30%;
+  width: 50%;
   animation-delay: 15s;
   animation-duration: 35s;
 }
-

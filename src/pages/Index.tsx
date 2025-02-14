@@ -1,6 +1,6 @@
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Compass } from 'lucide-react';
+import { Squirrel } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -37,47 +37,49 @@ const Index = () => {
   const content = getContent();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-4xl mx-auto">
-      <div className="text-white space-y-8">
-        <div className="flex items-center justify-center mb-8">
-          <Compass className="w-16 h-16 text-green-400" />
-        </div>
-        
-        <div className="space-y-6">
-          <div>
-            {content.pitch.split('\n').map((paragraph, index) => (
-              <p key={index} className="text-xl text-gray-300 mb-4">
-                {paragraph}
-              </p>
-            ))}
+    <main className="relative z-10">
+      <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-4xl mx-auto px-4">
+        <div className="text-white space-y-8">
+          <div className="flex items-center justify-center mb-8">
+            <Squirrel className="w-16 h-16 text-green-400" />
           </div>
+          
+          <div className="space-y-6">
+            <div>
+              {content.pitch.split('\n').map((paragraph, index) => (
+                <p key={index} className="text-xl text-gray-300 mb-4">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
 
-          <div className="flex items-center justify-center space-x-4">
-            <Button 
-              onClick={() => navigate(`/${currentLang}/tours`)}
-              className="bg-green-500 hover:bg-green-600"
-            >
-              {content.bookTour}
-            </Button>
-            <Button 
-              onClick={() => navigate(`/${currentLang}/houses`)}
-              variant="outline"
-              className="border-green-500 text-green-500 hover:bg-green-500/10"
-            >
-              {content.rentHouse}
-            </Button>
-          </div>
+            <div className="flex items-center justify-center space-x-4">
+              <Button 
+                onClick={() => navigate(`/${currentLang}/tours`)}
+                className="bg-green-500 hover:bg-green-600 text-white px-6 py-2"
+              >
+                {content.bookTour}
+              </Button>
+              <Button 
+                onClick={() => navigate(`/${currentLang}/houses`)}
+                variant="outline"
+                className="border-green-500 text-green-500 hover:bg-green-500/10 px-6 py-2"
+              >
+                {content.rentHouse}
+              </Button>
+            </div>
 
-          <div className="mt-16">
-            {content.about.split('\n').map((paragraph, index) => (
-              <p key={index} className="text-base text-gray-400 mb-4">
-                {paragraph}
-              </p>
-            ))}
+            <div className="mt-16">
+              {content.about.split('\n').map((paragraph, index) => (
+                <p key={index} className="text-base text-gray-400 mb-4">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 
