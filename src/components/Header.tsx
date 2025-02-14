@@ -7,7 +7,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
 
 interface HeaderProps {
   currentLang: string;
@@ -17,14 +16,6 @@ interface HeaderProps {
 const Header = ({ currentLang, onLanguageChange }: HeaderProps) => {
   const location = useLocation();
   
-  const getLangLabel = (lang: string) => {
-    switch(lang) {
-      case 'ru': return 'Русский';
-      case 'cn': return '中文';
-      default: return 'English';
-    }
-  };
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm">
       <div className="container mx-auto px-4">
@@ -40,28 +31,21 @@ const Header = ({ currentLang, onLanguageChange }: HeaderProps) => {
             <Link to={`/${currentLang}/houses`} className="text-white hover:text-blue-400 transition">
               {currentLang === 'ru' ? 'Дома' : currentLang === 'cn' ? '住宿' : 'Houses'}
             </Link>
-            <Link to={`/${currentLang}/about`} className="text-white hover:text-blue-400 transition">
-              {currentLang === 'ru' ? 'О нас' : currentLang === 'cn' ? '关于我们' : 'About'}
-            </Link>
-            <Link to={`/${currentLang}/contact`} className="text-white hover:text-blue-400 transition">
-              {currentLang === 'ru' ? 'Контакты' : currentLang === 'cn' ? '联系我们' : 'Contact'}
-            </Link>
           </nav>
 
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center space-x-1 text-white hover:text-blue-400 transition">
-              <span>{getLangLabel(currentLang)}</span>
-              <ChevronDown className="h-4 w-4" />
+            <DropdownMenuTrigger className="px-3 py-1 text-sm font-medium text-white bg-slate-800/50 rounded-full hover:bg-slate-700/50 transition">
+              {currentLang}
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem onClick={() => onLanguageChange('en')}>
-                English
+            <DropdownMenuContent className="bg-slate-900/95 backdrop-blur-sm border-slate-700">
+              <DropdownMenuItem onClick={() => onLanguageChange('en')} className="text-slate-300 hover:text-white hover:bg-slate-800/50">
+                EN
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onLanguageChange('ru')}>
-                Русский
+              <DropdownMenuItem onClick={() => onLanguageChange('ru')} className="text-slate-300 hover:text-white hover:bg-slate-800/50">
+                RU
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onLanguageChange('cn')}>
-                中文
+              <DropdownMenuItem onClick={() => onLanguageChange('cn')} className="text-slate-300 hover:text-white hover:bg-slate-800/50">
+                CN
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
