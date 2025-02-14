@@ -14,61 +14,30 @@
   }
 }
 
-@keyframes auroraLong {
-  0% {
-    transform: translate(-50%, -50%) rotate(-45deg) scale(1, 1) skew(0deg);
-    opacity: 0.3;
-  }
-  25% {
-    transform: translate(-45%, -55%) rotate(-40deg) scale(1.2, 0.8) skew(5deg);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate(-55%, -45%) rotate(-50deg) scale(0.8, 1.1) skew(-5deg);
-    opacity: 0.4;
-  }
-  75% {
-    transform: translate(-45%, -55%) rotate(-42deg) scale(1.1, 0.9) skew(3deg);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-45deg) scale(1, 1) skew(0deg);
-    opacity: 0.3;
-  }
+@keyframes auroraFade {
+  0%, 100% { opacity: 0; }
+  25%, 75% { opacity: 0.5; }
+  50% { opacity: 0.8; }
 }
 
-@keyframes auroraVertical {
-  0% {
-    transform: translate(-50%, -50%) rotate(10deg) scale(1, 1);
-    opacity: 0.2;
-  }
-  33% {
-    transform: translate(-45%, -55%) rotate(15deg) scale(0.9, 1.2);
-    opacity: 0.4;
-  }
-  66% {
-    transform: translate(-55%, -45%) rotate(5deg) scale(1.1, 0.8);
-    opacity: 0.3;
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(10deg) scale(1, 1);
-    opacity: 0.2;
-  }
+@keyframes aurora1 {
+  0% { transform: translate(-200%, -50%) rotate(-45deg) scaleY(0.5); }
+  100% { transform: translate(200%, -50%) rotate(-45deg) scaleY(0.5); }
 }
 
-@keyframes auroraCurved {
-  0% {
-    transform: translate(-50%, -50%) rotate(-20deg) scale(1, 1) skew(10deg);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translate(-45%, -55%) rotate(-15deg) scale(1.2, 0.9) skew(15deg);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(-20deg) scale(1, 1) skew(10deg);
-    opacity: 0.3;
-  }
+@keyframes aurora2 {
+  0% { transform: translate(100%, -100%) rotate(10deg) scaleX(0.2); }
+  100% { transform: translate(-100%, 100%) rotate(10deg) scaleX(0.2); }
+}
+
+@keyframes aurora3 {
+  0% { transform: translate(-150%, 0%) rotate(-30deg) scale(0.3, 0.1); }
+  100% { transform: translate(150%, 0%) rotate(-30deg) scale(0.3, 0.1); }
+}
+
+@keyframes aurora4 {
+  0% { transform: translate(0%, -150%) rotate(60deg) scale(0.4, 0.2); }
+  100% { transform: translate(0%, 150%) rotate(60deg) scale(0.4, 0.2); }
 }
 
 .aurora {
@@ -81,60 +50,128 @@
 
 .aurora__item {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  background: linear-gradient(90deg, 
-    rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.2) 20%,
-    rgba(34, 197, 94, 0.4) 40%,
-    rgba(34, 197, 94, 0.2) 60%,
-    rgba(34, 197, 94, 0) 100%
-  );
   filter: blur(30px);
   transform-origin: center;
 }
 
-/* Long diagonal aurora */
+/* Create multiple aurora items with different properties */
 .aurora__item:nth-child(1) {
-  width: 200vh;
-  height: 10vh;
-  animation: auroraLong 45s infinite;
-  background: linear-gradient(90deg, 
+  top: 0%;
+  left: 20%;
+  width: 300px;
+  height: 15px;
+  animation: 
+    aurora1 20s linear infinite,
+    auroraFade 15s ease-in-out infinite;
+  background: linear-gradient(90deg,
     rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.3) 30%,
-    rgba(14, 165, 233, 0.5) 50%,
-    rgba(34, 197, 94, 0.3) 70%,
+    rgba(34, 197, 94, 0.5) 50%,
     rgba(34, 197, 94, 0) 100%
   );
 }
 
-/* Vertical streaks */
 .aurora__item:nth-child(2) {
-  width: 80vh;
-  height: 15vh;
-  animation: auroraVertical 55s infinite;
-  animation-delay: -15s;
+  top: 30%;
+  right: 10%;
+  width: 500px;
+  height: 20px;
+  animation: 
+    aurora2 25s linear infinite,
+    auroraFade 18s ease-in-out infinite 2s;
   background: linear-gradient(90deg,
     rgba(139, 92, 246, 0) 0%,
-    rgba(139, 92, 246, 0.3) 30%,
-    rgba(34, 197, 94, 0.5) 50%,
-    rgba(139, 92, 246, 0.3) 70%,
+    rgba(139, 92, 246, 0.5) 50%,
     rgba(139, 92, 246, 0) 100%
   );
 }
 
-/* Curved streak */
 .aurora__item:nth-child(3) {
-  width: 150vh;
-  height: 8vh;
-  animation: auroraCurved 60s infinite;
-  animation-delay: -30s;
+  top: 60%;
+  left: 40%;
+  width: 400px;
+  height: 12px;
+  animation: 
+    aurora3 30s linear infinite,
+    auroraFade 20s ease-in-out infinite 5s;
+  background: linear-gradient(90deg,
+    rgba(14, 165, 233, 0) 0%,
+    rgba(14, 165, 233, 0.5) 50%,
+    rgba(14, 165, 233, 0) 100%
+  );
+}
+
+.aurora__item:nth-child(4) {
+  top: 20%;
+  left: 60%;
+  width: 600px;
+  height: 18px;
+  animation: 
+    aurora4 22s linear infinite,
+    auroraFade 16s ease-in-out infinite 3s;
   background: linear-gradient(90deg,
     rgba(34, 197, 94, 0) 0%,
-    rgba(14, 165, 233, 0.3) 30%,
     rgba(34, 197, 94, 0.5) 50%,
-    rgba(14, 165, 233, 0.3) 70%,
+    rgba(34, 197, 94, 0) 100%
+  );
+}
+
+.aurora__item:nth-child(5) {
+  top: 80%;
+  left: 30%;
+  width: 450px;
+  height: 15px;
+  animation: 
+    aurora2 28s linear infinite,
+    auroraFade 19s ease-in-out infinite 7s;
+  background: linear-gradient(90deg,
+    rgba(139, 92, 246, 0) 0%,
+    rgba(139, 92, 246, 0.5) 50%,
+    rgba(139, 92, 246, 0) 100%
+  );
+}
+
+.aurora__item:nth-child(6) {
+  top: 40%;
+  right: 20%;
+  width: 350px;
+  height: 10px;
+  animation: 
+    aurora3 24s linear infinite,
+    auroraFade 17s ease-in-out infinite 4s;
+  background: linear-gradient(90deg,
+    rgba(14, 165, 233, 0) 0%,
+    rgba(14, 165, 233, 0.5) 50%,
     rgba(14, 165, 233, 0) 100%
+  );
+}
+
+.aurora__item:nth-child(7) {
+  top: 10%;
+  left: 50%;
+  width: 550px;
+  height: 16px;
+  animation: 
+    aurora1 26s linear infinite,
+    auroraFade 21s ease-in-out infinite 6s;
+  background: linear-gradient(90deg,
+    rgba(34, 197, 94, 0) 0%,
+    rgba(34, 197, 94, 0.5) 50%,
+    rgba(34, 197, 94, 0) 100%
+  );
+}
+
+.aurora__item:nth-child(8) {
+  top: 70%;
+  right: 40%;
+  width: 400px;
+  height: 14px;
+  animation: 
+    aurora4 23s linear infinite,
+    auroraFade 18s ease-in-out infinite 8s;
+  background: linear-gradient(90deg,
+    rgba(139, 92, 246, 0) 0%,
+    rgba(139, 92, 246, 0.5) 50%,
+    rgba(139, 92, 246, 0) 100%
   );
 }
 
