@@ -1,6 +1,6 @@
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Deer } from 'lucide-react';
+import { Compass } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Index = () => {
@@ -40,7 +40,7 @@ const Index = () => {
     <div className="flex flex-col items-center justify-center min-h-[80vh] text-center max-w-4xl mx-auto">
       <div className="text-white space-y-8">
         <div className="flex items-center justify-center mb-8">
-          <Deer className="w-16 h-16 text-green-400" />
+          <Compass className="w-16 h-16 text-green-400" />
         </div>
         
         <div className="space-y-6">
