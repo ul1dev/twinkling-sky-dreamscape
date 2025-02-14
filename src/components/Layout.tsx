@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import StarryNight from "./StarryNight";
-import AuroraEffect from "./AuroraEffect";
+import AuroraEffect from "./aurora/AuroraEffect";
 import { useState, ReactNode } from "react";
 
 interface LayoutProps {
