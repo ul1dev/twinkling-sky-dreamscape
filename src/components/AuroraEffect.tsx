@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
@@ -115,28 +114,36 @@ const fragmentShader = `
     return 2.2 * n_xyz;
   }
 
+  float createBand(vec2 uv, float offset) {
+    float band = cnoise(vec3(uv.x * 3.0, uv.y * 2.0 + offset + time * 0.2, time * 0.1));
+    band = smoothstep(0.2, 0.8, band + 0.5); // Create sharper bands
+    return band;
+  }
+
   void main() {
-    float noise = cnoise(vec3(vUv * 5.0, time * 0.2));
-    noise = (noise + 1.0) * 0.5; // normalize to 0-1
+    // Create multiple shimmering bands
+    float band1 = createBand(vUv, 0.0);
+    float band2 = createBand(vUv + vec2(0.5, 2.0), 10.0);
+    float band3 = createBand(vUv + vec2(-0.3, 1.0), 20.0);
     
-    // Create multiple layers of noise
-    float noise2 = cnoise(vec3(vUv * 3.0 + 100.0, time * 0.15));
-    noise2 = (noise2 + 1.0) * 0.5;
+    // Layer the bands with different intensities
+    float finalBand = band1 * 0.5 + band2 * 0.3 + band3 * 0.2;
     
-    float noise3 = cnoise(vec3(vUv * 8.0 + 300.0, time * 0.1));
-    noise3 = (noise3 + 1.0) * 0.5;
+    // Add vertical falloff for more natural look
+    float verticalFalloff = smoothstep(0.0, 0.5, 1.0 - abs(vUv.y * 2.0 - 1.0));
+    finalBand *= verticalFalloff;
     
-    // Combine noises
-    float finalNoise = noise * 0.5 + noise2 * 0.3 + noise3 * 0.2;
+    // Add time-based shimmer effect
+    float shimmer = sin(time * 2.0 + vUv.x * 10.0) * 0.1 + 0.9;
     
     // Create color transitions
-    vec3 color = mix(color1, color2, finalNoise);
-    color = mix(color, color3, noise2 * 0.5);
+    vec3 color = mix(color1, color2, finalBand);
+    color = mix(color, color3, band2 * 0.5);
     
-    // Add brightness variation
+    // Apply shimmer and brightness variation
     float brightness = 0.8 + sin(time * 0.5) * 0.2;
     
-    gl_FragColor = vec4(color * brightness, finalNoise * 0.8);
+    gl_FragColor = vec4(color * brightness * shimmer, finalBand * 0.8);
   }
 `;
 
@@ -168,13 +175,13 @@ const AuroraEffect: React.FC = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Create aurora material
+    // Create aurora material with enhanced colors
     const material = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color1: { value: new THREE.Color(0x22c55e) }, // Green
-        color2: { value: new THREE.Color(0x8b5cf6) }, // Purple
-        color3: { value: new THREE.Color(0x0ea5e9) }, // Blue
+        color1: { value: new THREE.Color(0x22c55e).multiplyScalar(1.5) }, // Brighter green
+        color2: { value: new THREE.Color(0x8b5cf6).multiplyScalar(1.2) }, // Brighter purple
+        color3: { value: new THREE.Color(0x0ea5e9).multiplyScalar(1.3) }, // Brighter blue
       },
       vertexShader,
       fragmentShader,
@@ -192,7 +199,7 @@ const AuroraEffect: React.FC = () => {
     let animationFrameId: number;
     const animate = () => {
       if (materialRef.current) {
-        materialRef.current.uniforms.time.value += 0.01;
+        materialRef.current.uniforms.time.value += 0.005; // Slower animation for more natural movement
       }
       renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(animate);
