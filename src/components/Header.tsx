@@ -1,6 +1,13 @@
 
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ChevronDown } from "lucide-react";
 
 interface HeaderProps {
   currentLang: string;
@@ -10,8 +17,12 @@ interface HeaderProps {
 const Header = ({ currentLang, onLanguageChange }: HeaderProps) => {
   const location = useLocation();
   
-  const changeLang = (lang: string) => {
-    onLanguageChange(lang);
+  const getLangLabel = (lang: string) => {
+    switch(lang) {
+      case 'ru': return 'Русский';
+      case 'cn': return '中文';
+      default: return 'English';
+    }
   };
 
   return (
@@ -37,26 +48,23 @@ const Header = ({ currentLang, onLanguageChange }: HeaderProps) => {
             </Link>
           </nav>
 
-          <div className="flex space-x-4">
-            <button
-              onClick={() => changeLang('en')}
-              className={`text-sm ${currentLang === 'en' ? 'text-blue-400' : 'text-white'}`}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => changeLang('ru')}
-              className={`text-sm ${currentLang === 'ru' ? 'text-blue-400' : 'text-white'}`}
-            >
-              RU
-            </button>
-            <button
-              onClick={() => changeLang('cn')}
-              className={`text-sm ${currentLang === 'cn' ? 'text-blue-400' : 'text-white'}`}
-            >
-              中文
-            </button>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center space-x-1 text-white hover:text-blue-400 transition">
+              <span>{getLangLabel(currentLang)}</span>
+              <ChevronDown className="h-4 w-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem onClick={() => onLanguageChange('en')}>
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onLanguageChange('ru')}>
+                Русский
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onLanguageChange('cn')}>
+                中文
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>
