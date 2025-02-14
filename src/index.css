@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -15,27 +14,61 @@
   }
 }
 
-@keyframes aurora1 {
-  0% { transform: translate(-50%, -50%) rotate(0deg) skewX(10deg); opacity: 0.3; }
-  25% { transform: translate(-48%, -52%) rotate(5deg) skewX(5deg); opacity: 0.6; }
-  50% { transform: translate(-52%, -48%) rotate(-5deg) skewX(15deg); opacity: 0.4; }
-  75% { transform: translate(-48%, -52%) rotate(3deg) skewX(8deg); opacity: 0.5; }
-  100% { transform: translate(-50%, -50%) rotate(0deg) skewX(10deg); opacity: 0.3; }
+@keyframes auroraLong {
+  0% {
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1, 1) skew(0deg);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translate(-45%, -55%) rotate(-40deg) scale(1.2, 0.8) skew(5deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(-55%, -45%) rotate(-50deg) scale(0.8, 1.1) skew(-5deg);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(-45%, -55%) rotate(-42deg) scale(1.1, 0.9) skew(3deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-45deg) scale(1, 1) skew(0deg);
+    opacity: 0.3;
+  }
 }
 
-@keyframes aurora2 {
-  0% { transform: translate(-50%, -50%) rotate(180deg) skewX(-10deg); opacity: 0.2; }
-  33% { transform: translate(-52%, -48%) rotate(175deg) skewX(-15deg); opacity: 0.4; }
-  66% { transform: translate(-48%, -52%) rotate(185deg) skewX(-5deg); opacity: 0.3; }
-  100% { transform: translate(-50%, -50%) rotate(180deg) skewX(-10deg); opacity: 0.2; }
+@keyframes auroraVertical {
+  0% {
+    transform: translate(-50%, -50%) rotate(10deg) scale(1, 1);
+    opacity: 0.2;
+  }
+  33% {
+    transform: translate(-45%, -55%) rotate(15deg) scale(0.9, 1.2);
+    opacity: 0.4;
+  }
+  66% {
+    transform: translate(-55%, -45%) rotate(5deg) scale(1.1, 0.8);
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(10deg) scale(1, 1);
+    opacity: 0.2;
+  }
 }
 
-@keyframes aurora3 {
-  0% { transform: translate(-50%, -50%) rotate(90deg) skewX(5deg); opacity: 0.3; }
-  25% { transform: translate(-48%, -52%) rotate(95deg) skewX(10deg); opacity: 0.5; }
-  50% { transform: translate(-52%, -48%) rotate(85deg) skewX(0deg); opacity: 0.4; }
-  75% { transform: translate(-48%, -52%) rotate(93deg) skewX(7deg); opacity: 0.6; }
-  100% { transform: translate(-50%, -50%) rotate(90deg) skewX(5deg); opacity: 0.3; }
+@keyframes auroraCurved {
+  0% {
+    transform: translate(-50%, -50%) rotate(-20deg) scale(1, 1) skew(10deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-45%, -55%) rotate(-15deg) scale(1.2, 0.9) skew(15deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-20deg) scale(1, 1) skew(10deg);
+    opacity: 0.3;
+  }
 }
 
 .aurora {
@@ -50,43 +83,59 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 150vw;
-  height: 150vh;
   background: linear-gradient(90deg, 
-    rgba(139, 92, 246, 0) 0%,
-    rgba(139, 92, 246, 0.3) 25%,
-    rgba(14, 165, 233, 0.5) 50%,
-    rgba(34, 197, 94, 0.3) 75%,
+    rgba(34, 197, 94, 0) 0%,
+    rgba(34, 197, 94, 0.2) 20%,
+    rgba(34, 197, 94, 0.4) 40%,
+    rgba(34, 197, 94, 0.2) 60%,
     rgba(34, 197, 94, 0) 100%
   );
-  filter: blur(60px);
-  animation: aurora1 45s infinite;
+  filter: blur(30px);
+  transform-origin: center;
 }
 
-.aurora__item:nth-child(2) {
-  background: linear-gradient(90deg,
-    rgba(217, 70, 239, 0) 0%,
-    rgba(217, 70, 239, 0.3) 25%,
-    rgba(34, 197, 94, 0.5) 50%,
-    rgba(14, 165, 233, 0.3) 75%,
-    rgba(14, 165, 233, 0) 100%
+/* Long diagonal aurora */
+.aurora__item:nth-child(1) {
+  width: 200vh;
+  height: 10vh;
+  animation: auroraLong 45s infinite;
+  background: linear-gradient(90deg, 
+    rgba(34, 197, 94, 0) 0%,
+    rgba(34, 197, 94, 0.3) 30%,
+    rgba(14, 165, 233, 0.5) 50%,
+    rgba(34, 197, 94, 0.3) 70%,
+    rgba(34, 197, 94, 0) 100%
   );
-  animation: aurora2 55s infinite;
-  animation-delay: -15s;
-  opacity: 0.4;
 }
 
+/* Vertical streaks */
+.aurora__item:nth-child(2) {
+  width: 80vh;
+  height: 15vh;
+  animation: auroraVertical 55s infinite;
+  animation-delay: -15s;
+  background: linear-gradient(90deg,
+    rgba(139, 92, 246, 0) 0%,
+    rgba(139, 92, 246, 0.3) 30%,
+    rgba(34, 197, 94, 0.5) 50%,
+    rgba(139, 92, 246, 0.3) 70%,
+    rgba(139, 92, 246, 0) 100%
+  );
+}
+
+/* Curved streak */
 .aurora__item:nth-child(3) {
+  width: 150vh;
+  height: 8vh;
+  animation: auroraCurved 60s infinite;
+  animation-delay: -30s;
   background: linear-gradient(90deg,
     rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.3) 25%,
-    rgba(139, 92, 246, 0.5) 50%,
-    rgba(217, 70, 239, 0.3) 75%,
-    rgba(217, 70, 239, 0) 100%
+    rgba(14, 165, 233, 0.3) 30%,
+    rgba(34, 197, 94, 0.5) 50%,
+    rgba(14, 165, 233, 0.3) 70%,
+    rgba(14, 165, 233, 0) 100%
   );
-  animation: aurora3 60s infinite;
-  animation-delay: -30s;
-  opacity: 0.3;
 }
 
 .button-rounded {
