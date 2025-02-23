@@ -1,8 +1,14 @@
 
 import StarryNight from '../components/StarryNight';
+import Missiles from '../components/Missiles';
 
 const Index = () => {
-  return <StarryNight />;
+  return (
+    <>
+      <StarryNight />
+      <Missiles />
+    </>
+  );
 };
 
 export default Index;
