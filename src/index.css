@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,152 +7,19 @@
   body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    background-color: #000811;
-    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    background-color: black;
   }
 }
 
-@keyframes auroraSwirl {
-  0% {
-    transform: translate(-50%, -50%) rotate(0deg) scale(1) skew(-5deg);
-    filter: brightness(1) blur(40px);
-  }
-  25% {
-    transform: translate(-45%, -55%) rotate(90deg) scale(1.1) skew(5deg);
-    filter: brightness(1.2) blur(35px);
-  }
-  50% {
-    transform: translate(-55%, -45%) rotate(180deg) scale(0.9) skew(-5deg);
-    filter: brightness(0.8) blur(45px);
-  }
-  75% {
-    transform: translate(-45%, -55%) rotate(270deg) scale(1.2) skew(5deg);
-    filter: brightness(1.1) blur(38px);
-  }
-  100% {
-    transform: translate(-50%, -50%) rotate(360deg) scale(1) skew(-5deg);
-    filter: brightness(1) blur(40px);
-  }
+@keyframes twinkle {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.5); }
 }
 
-@keyframes shimmer {
-  0% { opacity: 0.3; }
-  25% { opacity: 0.8; }
-  50% { opacity: 0.5; }
-  75% { opacity: 0.9; }
-  100% { opacity: 0.3; }
-}
-
-.aurora {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  overflow: hidden;
-}
-
-.aurora__item {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150vh;
-  height: 20vh;
-  background: linear-gradient(
-    90deg,
-    rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.4) 25%,
-    rgba(139, 92, 246, 0.2) 50%,
-    rgba(34, 197, 94, 0.4) 75%,
-    rgba(34, 197, 94, 0) 100%
-  );
-  filter: blur(40px);
-  transform-origin: center;
-  opacity: 0;
-}
-
-.aurora__item:nth-child(1) {
-  animation: 
-    auroraSwirl 30s ease-in-out infinite,
-    shimmer 8s ease-in-out infinite;
-}
-
-.aurora__item:nth-child(2) {
-  width: 120vh;
-  height: 15vh;
-  animation: 
-    auroraSwirl 25s ease-in-out infinite reverse,
-    shimmer 10s ease-in-out infinite 2s;
-  background: linear-gradient(
-    90deg,
-    rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.5) 30%,
-    rgba(139, 92, 246, 0.3) 50%,
-    rgba(34, 197, 94, 0.5) 70%,
-    rgba(34, 197, 94, 0) 100%
-  );
-}
-
-.aurora__item:nth-child(3) {
-  width: 180vh;
-  height: 25vh;
-  animation: 
-    auroraSwirl 35s ease-in-out infinite,
-    shimmer 12s ease-in-out infinite 4s;
-  background: linear-gradient(
-    90deg,
-    rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.3) 30%,
-    rgba(139, 92, 246, 0.4) 50%,
-    rgba(34, 197, 94, 0.3) 70%,
-    rgba(34, 197, 94, 0) 100%
-  );
-}
-
-.aurora__item:nth-child(4) {
-  width: 130vh;
-  height: 18vh;
-  animation: 
-    auroraSwirl 28s ease-in-out infinite reverse,
-    shimmer 9s ease-in-out infinite 1s;
-  background: linear-gradient(
-    90deg,
-    rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.6) 30%,
-    rgba(139, 92, 246, 0.2) 50%,
-    rgba(34, 197, 94, 0.6) 70%,
-    rgba(34, 197, 94, 0) 100%
-  );
-}
-
-.aurora__item:nth-child(5) {
-  width: 160vh;
-  height: 22vh;
-  animation: 
-    auroraSwirl 32s ease-in-out infinite,
-    shimmer 11s ease-in-out infinite 3s;
-  background: linear-gradient(
-    90deg,
-    rgba(34, 197, 94, 0) 0%,
-    rgba(34, 197, 94, 0.4) 30%,
-    rgba(139, 92, 246, 0.3) 50%,
-    rgba(34, 197, 94, 0.4) 70%,
-    rgba(34, 197, 94, 0) 100%
-  );
-}
-
-.button-rounded {
-  @apply rounded-full transition-all duration-300 ease-in-out text-base font-medium;
-}
-
-.content-container {
-  @apply backdrop-blur-sm bg-slate-900/40 rounded-3xl p-8 border border-slate-700/30;
-}
-
-.heading-text {
-  @apply font-inter text-4xl font-bold tracking-tight;
-}
-
-.body-text {
-  @apply font-inter text-base leading-relaxed;
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
 }
