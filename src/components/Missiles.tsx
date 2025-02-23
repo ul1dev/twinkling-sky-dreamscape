@@ -16,18 +16,17 @@ const Missiles = () => {
   useEffect(() => {
     const createMissile = () => {
       const id = Date.now();
-      const size = Math.random() * 100 + 50; // Random size between 50 and 150
+      const size = Math.random() * 50 + 30; // Smaller size range to match pixel art style
       const startFromLeft = Math.random() < 0.5;
       const top = Math.random() * window.innerHeight;
       const left = startFromLeft ? -150 : window.innerWidth;
       const angle = startFromLeft 
         ? -30 + Math.random() * 60 // Angle between -30 and 30 degrees when starting from left
         : 150 + Math.random() * 60; // Angle between 150 and 210 degrees when starting from right
-      const speed = 3 + Math.random() * 2; // Random speed between 3 and 5
+      const speed = 3 + Math.random() * 2;
 
       setMissiles(prev => [...prev, { id, size, top, left, angle, speed }]);
 
-      // Remove missile after it goes off screen
       setTimeout(() => {
         setMissiles(prev => prev.filter(m => m.id !== id));
       }, 10000);
@@ -81,19 +80,22 @@ const Missiles = () => {
             <div
               className="absolute top-0 left-0 w-full h-full"
               style={{
-                background: `url('/lovable-uploads/58ed175b-23fc-4eee-aaf1-a0df49b8655c.png')`,
+                background: `url('/lovable-uploads/bd2ccef2-e18a-44e1-b4e4-418f7ea028e7.png')`,
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat',
-                filter: 'drop-shadow(0 0 10px rgba(255, 165, 0, 0.5))'
+                imageRendering: 'pixelated', // Add pixel art rendering
               }}
             />
             <div
               className="absolute right-full top-1/2 -translate-y-1/2"
               style={{
-                width: missile.size * 1.5,
-                height: missile.size / 3,
-                background: 'linear-gradient(to left, rgba(255, 165, 0, 0.3), transparent)',
-                filter: 'blur(5px)',
+                width: missile.size * 1.2,
+                height: missile.size * 0.6,
+                background: 'linear-gradient(to left, rgba(255, 76, 0, 0.8), rgba(255, 195, 0, 0.3), transparent)',
+                filter: 'blur(2px)',
+                transform: 'scaleX(1.2)',
+                transformOrigin: 'right',
+                animation: 'flicker 0.1s infinite alternate'
               }}
             />
           </div>
